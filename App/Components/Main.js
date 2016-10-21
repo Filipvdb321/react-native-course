@@ -1,4 +1,7 @@
 import React, {Component} from 'react';
+import api from '../Utils/api';
+import Dashboard from '../Components/Dashboard';
+
 import {
     StyleSheet,
     Text,
@@ -68,13 +71,33 @@ class Main extends Component {
         });
     }
 
-    handleSubmit(){
+    handleSubmit() {
         //update our incictatorIOS spinner
         this.setState({
             isLoading: true
         });
         //fetch data from github
-        console.log('SUBMIT', this.state.username);
+        api.getBio(this.state.username)
+            .then((res) => {
+                if (res.message == 'Not Found') {
+                    this.setState({
+                        error: 'User not found',
+                        isLoading: false
+                    })
+                }
+                else {
+                    this.props.navigator.push({
+                        title: res.name || "Select an Option",
+                        component: Dashboard,
+                        passProps: {userInfo: res}
+                    });
+                    this.setState({
+                        isLoading : false,
+                        error : false,
+                        username : ''
+                    })
+                }
+            });
 
         //reroute to next passing that github information
     }
