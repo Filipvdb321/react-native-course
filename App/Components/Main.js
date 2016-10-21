@@ -79,7 +79,8 @@ class Main extends Component {
         //fetch data from github
         api.getBio(this.state.username)
             .then((res) => {
-                if (res.message == 'Not Found') {
+                console.log('response:',res.message);
+                if (res.message === 'Not Found') {
                     this.setState({
                         error: 'User not found',
                         isLoading: false
@@ -103,6 +104,9 @@ class Main extends Component {
     }
 
     render() {
+        var showErr = (
+            this.state.error ? <Text>{this.state.error}</Text> : <View/>
+        );
         return (
             <View style={styles.mainContainer}>
                 <Text>Search for a Github User</Text>
@@ -116,6 +120,11 @@ class Main extends Component {
                     underlayColor="white">
                     <Text style={styles.buttonText}> SEARCH </Text>
                 </TouchableHighlight>
+                <ActivityIndicatorIOS
+                    animating={this.state.isLoading}
+                    color="#111"
+                    size="large"></ActivityIndicatorIOS>
+                {showErr}
             </View>
         )
     }
