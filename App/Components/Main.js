@@ -8,7 +8,7 @@ import {
     View,
     TextInput,
     TouchableHighlight,
-    ActivityIndicatorIOS
+    ActivityIndicator
 } from 'react-native';
 
 var styles = StyleSheet.create({
@@ -120,7 +120,7 @@ class Main extends Component {
                     underlayColor="white">
                     <Text style={styles.buttonText}> SEARCH </Text>
                 </TouchableHighlight>
-                <ActivityIndicatorIOS
+                <ActivityIndicator
                     animating={this.state.isLoading}
                     color="#111"
                     size="large"/>
