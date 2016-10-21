@@ -1,4 +1,6 @@
 import React, {Component} from 'react';
+import Profile from './Profile';
+
 import {
     Text,
     View,
@@ -43,7 +45,11 @@ class Dashboard extends Component {
     }
 
     goToProfile(){
-        console.log('Going to profile page');
+        this.props.navigator.push({
+            component: Profile,
+            title: 'Profile Page',
+            passProps: {userInfo: this.props.userInfo}
+        })
     }
 
     gotToRepos(){
