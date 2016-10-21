@@ -123,7 +123,7 @@ class Main extends Component {
                 <ActivityIndicatorIOS
                     animating={this.state.isLoading}
                     color="#111"
-                    size="large"></ActivityIndicatorIOS>
+                    size="large"/>
                 {showErr}
             </View>
         )
