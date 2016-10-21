@@ -2,7 +2,10 @@ import React, {Component} from 'react';
 import {
     StyleSheet,
     Text,
-    View
+    View,
+    TextInput,
+    TouchableHighlight,
+    ActivityIndicatorIOS
 } from 'react-native';
 
 var styles = StyleSheet.create({
@@ -49,11 +52,47 @@ var styles = StyleSheet.create({
     },
 });
 
-class Main extends Component{
-    render(){
+class Main extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: '',
+            isLoading: false,
+            error: false
+        }
+    }
+
+    handleChange(event) {
+        this.setState({
+            username: event.nativeEvent.text
+        });
+    }
+
+    handleSubmit(){
+        //update our incictatorIOS spinner
+        this.setState({
+            isLoading: true
+        });
+        //fetch data from github
+        console.log('SUBMIT', this.state.username);
+
+        //reroute to next passing that github information
+    }
+
+    render() {
         return (
             <View style={styles.mainContainer}>
-                <Text>Testing the Router</Text>
+                <Text>Search for a Github User</Text>
+                <TextInput
+                    style={styles.searchInput}
+                    value={this.state.username}
+                    onChange={this.handleChange.bind(this)}/>
+                <TouchableHighlight
+                    style={styles.button}
+                    onPress={this.handleSubmit.bind(this)}
+                    underlayColor="white">
+                    <Text style={styles.buttonText}> SEARCH </Text>
+                </TouchableHighlight>
             </View>
         )
     }
